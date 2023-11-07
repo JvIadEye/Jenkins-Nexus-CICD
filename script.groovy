@@ -24,21 +24,21 @@ def deployApp(){
 }
 
 def commitChanges(){
-        withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'PSW', usernameVariable: 'USER')]) {
+    withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'PSW', usernameVariable: 'USER')]) {
         sh 'git config --global user.name "jenkins"'
         sh 'git config --global user.email "jenkins@gmail.com"'
-        sh "git remote set-url origin https://${USER}:${PSW}@github.com/JvIadEye/nexus-CI-pipeline-for-portfolio.git"
+        sh "git remote set-url origin https://${USER}:${PSW}@github.com/JvIadEye/Jenkins-Nexus-CICD"
 
         //sh '''
         //    #!/bin/bash
         //    sed -i 's/Version:.*/Version: '"${BUILD_NUMBER}"'/g' index.html
         //'''
         
-        //sh "git add ."
-        //sh 'git commit -m "updated version"'
-        // sh "git push origin HEAD:main"
-  }
-  echo 'Changes committed by jenkins'
+        sh 'git add .'
+        sh 'git commit -m "updated version to ${BUILD_NUMBER}"'
+        sh 'git push origin HEAD:main'
+    }
+    echo 'Changes committed by jenkins'
 }
 
 return this
