@@ -45,9 +45,23 @@ pipeline{
         stage('AQUA CICD scanning'){
             steps{
                 script{
+                    //withCredentials([usernamePassword(credentialsId: 'nexus', passwordVariable: 'PSW', usernameVariable: 'USER')]){
+                    //sh '''
+                    //    docker login https://registry.aquasec.com -u ${USER} -p ${PSW}
+                    //    docker pull 192.168.1.231:9006/dockerhosted-repo:4
+                    //    docker logout
+                    //'''
+                    //}
+                    
                     withCredentials([usernamePassword(credentialsId: 'aqua', passwordVariable: 'PSW', usernameVariable: 'USER')]){
                     sh '''
-                        docker run -e BUILD_JOB_NAME=${BUILD_JOB_NAME} -e BUILD_URL=${BUILD_URL} -e BUILD_NUMBER=${BUILD_NUMBER} --rm -v /var/run/docker.sock:/var/run/docker.sock registry.aquasec.com/scanner:5.0 scan --host https://172.16.99.201:30903 --local 192.168.1.231:9006/dockerhosted-repo:27 --checkonly --no-verify --user ${USER} --password ${PSW} --layer-vulnerabilities                    '''
+                        docker login https://registry.aquasec.com -u ${USER} -p ${PSW}
+                        docker pull registry.aquasec.com/scanner:2022.4.284
+                        docker pull 192.168.1.231:9006/dockerhosted-repo:4
+                        docker logout
+
+                        docker run -e BUILD_JOB_NAME=${BUILD_JOB_NAME} -e BUILD_URL=${BUILD_URL} -e BUILD_NUMBER=${BUILD_NUMBER} --rm -v /var/run/docker.sock:/var/run/docker.sock registry.aquasec.com/scanner:2022.4.284 scan --host https://172.16.99.201:30903 --local 192.168.1.231:9006/dockerhosted-repo:27 --checkonly --no-verify --user ${USER} --password ${PSW} --layer-vulnerabilities                    
+                    '''
                     }
                 }
             }
