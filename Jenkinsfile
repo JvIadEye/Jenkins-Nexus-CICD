@@ -52,14 +52,6 @@ pipeline{
                 }
             }
         }
-
-        stage('Commit'){
-            steps{
-                script{
-                    gv_script.commitChanges()
-                }
-            }
-        }
     }
     post{
         success{
