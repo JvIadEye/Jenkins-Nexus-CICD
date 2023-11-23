@@ -10,7 +10,7 @@ def pushImage(){
     echo 'Pushing image to docker hosted rerpository on Nexus'
 
     withCredentials([usernamePassword(credentialsId: 'nexus', passwordVariable: 'PSW', usernameVariable: 'USER')]){
-        sh "echo ${PSW} | docker login -u ${USER} --password-stdin 192.168.1.231:9006"
+        sh "docker login 192.168.1.231:9006 -u ${USER} -p ${PSW}"
         sh "docker push 192.168.1.231:9006/dockerhosted-repo:${BUILD_NUMBER}"
     }
 }
