@@ -5,7 +5,7 @@ def buildApp(){
 
 def pushImage(){
     echo 'Building Image ...'
-    sh "docker buildx build -t 192.168.1.231:9006/dockerhosted-repo:${BUILD_NUMBER} ."
+    sh "docker build -t 192.168.1.231:9006/dockerhosted-repo:${BUILD_NUMBER} ."
 
     echo 'Pushing image to docker hosted rerpository on Nexus'
 
