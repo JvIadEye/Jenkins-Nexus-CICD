@@ -60,7 +60,7 @@ pipeline{
                         docker pull 172.16.99.205:9006/dockerhosted-repo:${BUILD_NUMBER}
                         docker logout
 
-                        docker run -e BUILD_JOB_NAME=${JOB_NAME} -e BUILD_URL=${BUILD_URL} -e BUILD_NUMBER=${BUILD_NUMBER} --rm -v /var/run/docker.sock:/var/run/docker.sock registry.aquasec.com/scanner:2022.4.404 scan --host https://172.16.99.212:30585 --local 172.16.99.205:9006/dockerhosted-repo:${BUILD_NUMBER} --checkonly --no-verify --user ${USER} --password ${PSW} --layer-vulnerabilities                    
+                        docker run -e BUILD_JOB_NAME=${JOB_NAME} -e BUILD_URL=${BUILD_URL} -e BUILD_NUMBER=${BUILD_NUMBER} --rm -v /var/run/docker.sock:/var/run/docker.sock registry.aquasec.com/scanner:2022.4.404 scan --host https://172.16.99.212:443 --local 172.16.99.205:9006/dockerhosted-repo:${BUILD_NUMBER} --checkonly --no-verify --user ${USER} --password ${PSW} --layer-vulnerabilities                    
                     '''
                     }
                 }
