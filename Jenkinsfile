@@ -57,10 +57,10 @@ pipeline{
                     sh '''
                         docker login https://registry.aquasec.com -u huy.tran@netpoleons.com -p Admin@123
                         docker pull registry.aquasec.com/scanner:2022.4.557
-                        docker pull 10.1.10.75:9006/dockerhosted-repo:${BUILD_NUMBER}
+                        docker pull 172.16.2.74:9006/dockerhosted-repo:${BUILD_NUMBER}
                         docker logout
 
-                        docker run -e BUILD_JOB_NAME=${JOB_NAME} -e BUILD_URL=${BUILD_URL} -e BUILD_NUMBER=${BUILD_NUMBER} --rm -v /var/run/docker.sock:/var/run/docker.sock registry.aquasec.com/scanner:2022.4.557 scan --host https://10.1.10.71:443 --local 10.1.10.75:9006/dockerhosted-repo:${BUILD_NUMBER} --checkonly --no-verify --user ${USER} --password ${PSW} --layer-vulnerabilities                    
+                        docker run -e BUILD_JOB_NAME=${JOB_NAME} -e BUILD_URL=${BUILD_URL} -e BUILD_NUMBER=${BUILD_NUMBER} --rm -v /var/run/docker.sock:/var/run/docker.sock registry.aquasec.com/scanner:2022.4.557 scan --host https://172.16.2.71:443 --local 172.16.2.74:9006/dockerhosted-repo:${BUILD_NUMBER} --checkonly --no-verify --user ${USER} --password ${PSW} --layer-vulnerabilities                    
                     '''
                     }
                 }
