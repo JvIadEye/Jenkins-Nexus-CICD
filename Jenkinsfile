@@ -55,7 +55,7 @@ pipeline{
                     
                     withCredentials([usernamePassword(credentialsId: 'aqua', passwordVariable: 'PSW', usernameVariable: 'USER')]){
                     sh '''
-                        docker login https://registry.aquasec.com -u huy.tran@netpoleons.com -p Admin@123
+                        docker login https://registry.aquasec.com -u huy.tran@netpoleons.com -p admin123
                         docker pull registry.aquasec.com/scanner:2022.4.557
                         docker pull 172.16.2.74:9006/dockerhosted-repo:${BUILD_NUMBER}
                         docker logout
