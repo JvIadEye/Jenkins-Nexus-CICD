@@ -42,6 +42,14 @@ pipeline{
             }
         }
 
+        stage('NEXUS IQ SCANNING'){
+            steps{
+                script{
+                    nexusPolicyEvaluation advancedProperties: '', enableDebugLogging: false, failBuildOnNetworkError: false, failBuildOnScanningErrors: false, iqApplication: selectedApplication('sandbox-application'), iqInstanceId: 'Netpoleon', iqOrganization: 'e3ef0e9231164a11b2675196a7e8ec80', iqStage: 'release', jobCredentialsId: '', reachability: [failOnError: false, java: [options: [], properties: [], tool: ''], javaAnalysis: [algorithm: 'RTA_PLUS', enable: false, entrypointStrategy: 'ACCESSIBLE_CONCRETE', force: false], jsAnalysis: [enable: false, force: false, sourceFiles: [[pattern: '']]]], unstableBuildOnScanningWarnings: false
+                }
+            }
+        }
+        
         stage('AQUA CICD scanning'){
             steps{
                 script{
@@ -72,5 +80,4 @@ pipeline{
             sh 'echo "Pipeline created successfully!"'
         }
     }
-    nexusPolicyEvaluation advancedProperties: '', enableDebugLogging: false, failBuildOnNetworkError: false, failBuildOnScanningErrors: false, iqApplication: selectedApplication('sandbox-application'), iqInstanceId: 'Netpoleon', iqOrganization: 'e3ef0e9231164a11b2675196a7e8ec80', iqStage: 'release', jobCredentialsId: '', reachability: [failOnError: false, java: [options: [], properties: [], tool: ''], javaAnalysis: [algorithm: 'RTA_PLUS', enable: false, entrypointStrategy: 'ACCESSIBLE_CONCRETE', force: false], jsAnalysis: [enable: false, force: false, sourceFiles: [[pattern: '']]]], unstableBuildOnScanningWarnings: false
 }
